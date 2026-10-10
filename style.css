@@ -1,0 +1,167 @@
+/* ==========================================================
+   style.css  -  Custom styling for the Employee Attrition app
+   Primary font: Times New Roman (with serif fallbacks)
+   ========================================================== */
+
+:root {
+    --font-main: "Times New Roman", Times, "Liberation Serif", "Tinos", Georgia, serif;
+    --navy: #1f3a5f;          /* headings, sidebar, accents       */
+    --blue: #2f5d8a;          /* primary colour (employees stayed) */
+    --rust: #b5472f;          /* highlight colour (employees left) */
+    --paper: #f7f5f0;         /* page background                   */
+    --card: #ffffff;          /* card background                   */
+    --border: #d9d4c7;        /* soft borders                      */
+    --text: #1b1b1b;
+    --muted: #5a5a5a;
+}
+
+/* ---------- 1. Typography: Times New Roman everywhere ----------
+   Icon fonts (Streamlit's arrows/chevrons) are deliberately excluded,
+   otherwise they would show as plain words such as "keyboard_arrow_down". */
+html, body, .stApp,
+.stApp p, .stApp li, .stApp label, .stApp a, .stApp small,
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6,
+.stApp div, .stApp button, .stApp input, .stApp textarea, .stApp select,
+.stApp table, .stApp th, .stApp td, .stApp caption,
+[data-testid="stSidebar"] *:not([data-testid="stIconMaterial"]):not([class*="material"]),
+[data-testid="stMetricLabel"], [data-testid="stMetricValue"],
+[data-baseweb="select"] *, [data-baseweb="tab"], [data-baseweb="popover"] *,
+.stDownloadButton button, .stButton button, .stRadio label, .stTabs button {
+    font-family: var(--font-main) !important;
+}
+
+/* Keep Streamlit's own icon font working */
+[data-testid="stIconMaterial"],
+span[class*="material-symbols"], span[class*="material-icons"] {
+    font-family: "Material Symbols Rounded", "Material Icons" !important;
+}
+
+html, body, .stApp { font-size: 18px; color: var(--text); }
+.stApp { background-color: var(--paper); }
+
+/* ---------- 2. Page layout ---------- */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1250px;
+}
+
+h1, h2, h3, h4 { color: var(--navy); font-weight: 700; letter-spacing: 0.2px; }
+h1 { font-size: 2.3rem; }
+h2 { font-size: 1.7rem; border-bottom: 2px solid var(--border); padding-bottom: 0.3rem; margin-top: 1.6rem; }
+h3 { font-size: 1.35rem; }
+
+p, li { line-height: 1.6; }
+.stCaption, [data-testid="stCaptionContainer"] { color: var(--muted); font-size: 0.95rem; }
+
+/* ---------- 3. Hero banner on the home page ---------- */
+.hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    color: #ffffff;
+    padding: 2.2rem 2.4rem;
+    border-radius: 10px;
+    margin-bottom: 1.6rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.hero h1 { color: #ffffff; margin: 0 0 0.4rem 0; font-size: 2.4rem; }
+.hero p  { color: #eef2f7; margin: 0; font-size: 1.15rem; }
+.hero .tag {
+    display: inline-block; font-size: 0.85rem; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #cfd9e6; margin-bottom: 0.5rem;
+}
+
+/* ---------- 4. Metric cards ---------- */
+.metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--blue);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.9rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.metric-card:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14); transform: translateY(-2px); }
+.metric-card.accent { border-left-color: var(--rust); }
+.metric-label { font-size: 0.95rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+.metric-value { font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1.2; }
+.metric-note  { font-size: 0.9rem; color: var(--muted); }
+
+/* ---------- 5. Content boxes ---------- */
+.info-box {
+    background: #eef3f9;
+    border-left: 5px solid var(--blue);
+    padding: 0.9rem 1.2rem;
+    border-radius: 6px;
+    margin: 0.8rem 0 1.2rem 0;
+}
+.warn-box {
+    background: #fbf0ec;
+    border-left: 5px solid var(--rust);
+    padding: 0.9rem 1.2rem;
+    border-radius: 6px;
+    margin: 0.8rem 0 1.2rem 0;
+}
+
+/* ---------- 6. Sidebar ---------- */
+[data-testid="stSidebar"] { background-color: var(--navy); }
+[data-testid="stSidebar"] * { color: #f2f5f9; }
+[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: #ffffff; border: none; }
+[data-testid="stSidebar"] .stRadio label { font-size: 1.1rem; padding: 0.2rem 0; }
+[data-testid="stSidebar"] [data-testid="stExpander"] {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+}
+/* Widgets inside the sidebar keep dark text so they stay readable on white inputs */
+[data-testid="stSidebar"] [data-baseweb="select"] *,
+[data-testid="stSidebar"] [data-baseweb="input"] * { color: #1b1b1b; }
+
+/* ---------- 7. Tabs, buttons, tables ---------- */
+.stTabs [data-baseweb="tab-list"] { gap: 0.4rem; border-bottom: 2px solid var(--border); }
+.stTabs [data-baseweb="tab"] { font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+
+.stButton button, .stDownloadButton button {
+    background-color: var(--navy);
+    color: #ffffff;
+    border: 1px solid var(--navy);
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    font-size: 1.05rem;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.stButton button:hover, .stDownloadButton button:hover {
+    background-color: var(--rust);
+    border-color: var(--rust);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stApp table { border-collapse: collapse; width: 100%; background: var(--card); }
+.stApp th { background-color: var(--navy); color: #ffffff; padding: 0.5rem 0.7rem; text-align: left; }
+.stApp td { padding: 0.45rem 0.7rem; border-bottom: 1px solid var(--border); }
+.stApp tr:hover td { background-color: #f1eee6; }
+
+/* Plotly charts sit on a white card */
+[data-testid="stPlotlyChart"] {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.4rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Footer */
+.footer { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+
+/* ---------- 8. Responsive layout (tablets and phones) ---------- */
+@media (max-width: 768px) {
+    html, body, .stApp { font-size: 16px; }
+    .block-container { padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; }
+    h1 { font-size: 1.7rem; }
+    h2 { font-size: 1.35rem; }
+    .hero { padding: 1.4rem 1.2rem; }
+    .hero h1 { font-size: 1.7rem; }
+    .hero p  { font-size: 1rem; }
+    .metric-value { font-size: 1.6rem; }
+}
